@@ -15,8 +15,8 @@ Route::get('/', function () {
     ]);
 })->name('questions.index');
 
-Route::get('/questions/{id}', function ($id) {
+Route::get('/questions/{question:slug}', function (Question $question) {
     return inertia('Questions/Show', [
-        'question' => ['id' => $id, 'title' => 'Question' . $id]
+        'question' => QuestionResource::make($question)
     ]);
 })->name('questions.show');

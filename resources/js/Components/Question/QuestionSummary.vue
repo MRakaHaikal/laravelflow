@@ -34,11 +34,10 @@ defineProps({
                     </ul>
                     <div class="question-summary-author">
                         <a href="#" class="avatar-sm">
-                            <img src="https://i.pravatar.cc/150?img=30" size="16" alt="" srcset="">
-                            {{ question.user.name }}
-                        </a>
-                        <span class="text-muted">asked <time :datetime="question.created_at.machine">{{
-                            question.created_at.human }}</time></span>
+                            <img :src="question.user.avatar_url" size="16" alt="{{ question.user.name }}" srcset="">
+                            {{ question.user.name }}</a> <span class="text-muted">asked <time
+                                :datetime="question.created_at.machine">{{
+                                    question.created_at.human }}</time></span>
                     </div>
                 </div>
                 <div class="post-action">
