@@ -1,6 +1,8 @@
+use PharIo\Manifest\Author;
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import AppLayout from '../../Layouts/AppLayout.vue';
+import Author from '../../Components/Author.vue';
 defineProps({
     question: {
         type: Object,
@@ -74,17 +76,7 @@ defineProps({
                                     <li><a href="#" class="tag">Laravel</a></li>
                                     <li><a href="#" class="tag">OOP</a></li>
                                 </ul>
-                                <div class="author owner">
-                                    <div class="author-info">
-                                        <div class="text-muted mb-1">Asked {{ question.created_at.formatted }}</div>
-                                        <a href="#" class="avatar-md">
-                                            <div class="d-flex align-items-center justify-content-start">
-                                                <img :src="question.user.avatar_url" class="me-2">
-                                                <span>{{ question.user.name }}</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                <Author :post-at="question.created_at" :user="question.user" />
                             </div>
                             <div class="post-action">
                                 <div class="d-flex gap-1 justify-content-center align-items-center">
