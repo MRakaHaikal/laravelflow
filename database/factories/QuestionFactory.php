@@ -17,7 +17,12 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $title = rtrim(fake()->realText(50), '.'),
+            'slug' => str($title)->slug(),
+            'body' => fake()->realText(500),
+            'votes_count' => fake()->randomNumber(1),
+            'answers_count' => fake()->randomNumber(1),
+            'views_count' => fake()->randomNumber(2),
         ];
     }
 }
