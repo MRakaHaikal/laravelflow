@@ -10,12 +10,12 @@
                             </div>
                         </div>
                     </div>
-                    <form action="#">
+                    <form @submit.prevent="form.post('/register')">
                         <div class="row gy-2 overflow-hidden">
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control is-invalid" name="name" id="name"
-                                        placeholder="Name">
+                                    <input type="text" class="form-control is-invalid" v-model="form.name" name="name"
+                                        id="name" placeholder="Name">
                                     <label for="name" class="form-label">Name</label>
                                     <div class="invalid-feedback">
                                         The name field is required
@@ -24,22 +24,23 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Email">
+                                    <input type="email" class="form-control" v-model="form.email" name="email"
+                                        id="email" placeholder="Email">
                                     <label for="email" class="form-label">Email</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="password" id="password" value=""
-                                        placeholder="Password">
+                                    <input type="password" class="form-control" v-model="form.password" name="password"
+                                        id="password" value="" placeholder="Password">
                                     <label for="password" class="form-label">Password</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="password_confirmation"
-                                        id="password_confirmation" value="" placeholder="Password">
+                                    <input type="password" class="form-control" v-model="form.password_confirmation"
+                                        name="password_confirmation" id="password_confirmation" value=""
+                                        placeholder="Password">
                                     <label for="password" class="form-label">Password Confirmation</label>
                                 </div>
                             </div>
@@ -67,5 +68,13 @@
 </template>
 <script setup>
 import GuestLayout from '../../Layouts/GuestLayout.vue';
+import { useForm } from '@inertiajs/vue3';
+
+const form = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+})
 </script>
 <style></style>
