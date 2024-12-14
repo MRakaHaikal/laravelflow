@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('body');
             $table->integer('votes_count')->default(0);
-            $table->unsignedInteger('views_count');
-            $table->unsignedInteger('answers_count');
+            $table->unsignedInteger('views_count')->default(0);
+            $table->unsignedInteger('answers_count')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
