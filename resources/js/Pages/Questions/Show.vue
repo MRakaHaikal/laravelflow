@@ -1,8 +1,8 @@
-use PharIo\Manifest\Author;
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import Author from '../../Components/Author.vue';
+import { Head } from '@inertiajs/vue3';
 defineProps({
     question: {
         type: Object,
@@ -12,6 +12,8 @@ defineProps({
 </script>
 
 <template>
+
+    <Head :title="question.title" />
     <AppLayout>
         <div class="container">
             <div class="row">

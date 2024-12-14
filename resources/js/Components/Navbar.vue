@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+</script>
+
 <template>
     <nav class="navbar navbar-expand-lg navbar-laravelflow">
         <div class="container">
-            <a class="navbar-brand" href="/"><strong>Stackoverflow</strong>Clone</a>
+            <Link class="navbar-brand" href="/"><strong>Laravel</strong>Flow</Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
