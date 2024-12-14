@@ -69,8 +69,8 @@
                         <div class="col-12">
                             <hr class="mt-4 mb-4 border-secondary-subtle">
                             <div class="text-center">
-                                Already have an account? <a href="login.html"
-                                    class="link-secondary text-decoration-none">Sign in</a>
+                                Already have an account?
+                                <Link :href="route('login')" class="link-secondary text-decoration-none">Sign in</Link>
                             </div>
                         </div>
                     </div>
@@ -78,10 +78,12 @@
             </div>
         </div>
     </GuestLayout>
+
+    <Head title="Register" />
 </template>
 <script setup>
 import GuestLayout from '../../Layouts/GuestLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm, Head } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
