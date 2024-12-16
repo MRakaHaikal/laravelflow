@@ -42,7 +42,7 @@
                 <Author :post-at="answer.created_at" :user="answer.user" isAnswer />
             </div>
             <ActionButtons v-if="$page.props.user && $page.props.user.id === props.answer.user.id"
-                @remove="removeAnswer" />
+                @remove="removeAnswer" @edit="emit('edit', answer)" />
         </div>
 
     </div>
@@ -59,6 +59,8 @@ const props = defineProps({
         required: true
     }
 });
+
+const emit = defineEmits(['edit', 'remove'])
 
 const removeAnswer = () => {
     if (confirm('Are you sure want to delete this question?')) {

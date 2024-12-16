@@ -1,8 +1,7 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import AppLayout from '../../Layouts/AppLayout.vue';
+import { Link, Head } from '@inertiajs/vue3';
 import Author from '../../Components/Author.vue';
-import { Head } from '@inertiajs/vue3';
+import AppLayout from '../../Layouts/AppLayout.vue';
 import Answers from '../../Components/Answer/Answers.vue';
 import CreateAnswer from '../../Components/Answer/CreateAnswer.vue';
 defineProps({

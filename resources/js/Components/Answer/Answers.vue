@@ -5,20 +5,42 @@
     </div>
 
     <div class="answer-content mt-4">
-        <AnswerSummary v-for="answer in answers.data" :key="answer.id" :answer="answer" />
+        <AnswerSummary v-for="answer in answers.data" :key="answer.id" :answer="answer" @edit="editAnswer" />
     </div>
+    <Modal id="update-answer-modal" :title="modalTitle" size="large" @hidden="editingAnswer.body = ''">
+        <UpdateAnswer :answer="editingAnswer" @success="hideModal" v-if="editingAnswer.body" />
+    </Modal>
 </template>
 
 <script setup>
+import { reactive } from 'vue';
+import useModal from '../../Composables/useModal';
 import Pagination from '../Pagination.vue';
 import AnswerSummary from './AnswerSummary.vue';
+import UpdateAnswer from './UpdateAnswer.vue';
+
+const { showModal, hideModal, modalTitle, Modal } = useModal('#update-answer-modal');
 
 defineProps({
     answers: {
         type: Object,
         required: true
     }
-})
-</script>
+});
 
-<style scoped></style>
+const editingAnswer = reactive({
+    id: '',
+    question_id: '',
+    body: ''
+});
+
+const editAnswer = (payload) => {
+    modalTitle.value = 'Edit Answer'
+
+    editingAnswer.body = payload.body
+    editingAnswer.question_id = payload.question_id
+    editingAnswer.id = payload.id
+
+    showModal()
+};
+</script>

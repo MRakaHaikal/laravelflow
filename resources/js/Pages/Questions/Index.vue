@@ -27,7 +27,6 @@ const question = reactive({
 
 const editing = ref(false);
 
-
 const askQuestion = () => {
     editing.value = false
     modalTitle.value = "Ask Question"
