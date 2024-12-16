@@ -110,13 +110,6 @@ const removeQuestion = (payload) => {
             <component :is="editing ? EditQuestionForm : CreateQuestionForm" :question="question"
                 @success="hideModal" />
         </Modal>
-        <!-- <h1>Welcome</h1>
-
-        <div v-for="question in questions" :key="question.id">
-            <Link :href="route('questions.show', question.id)">
-            {{ question.title }}
-            </Link>
-        </div> -->
     </AppLayout>
 
     <Head title="All Questions" />
