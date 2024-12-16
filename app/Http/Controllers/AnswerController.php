@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
@@ -26,7 +27,16 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAnswerRequest $request) {}
+    public function store(StoreAnswerRequest $request, Question $question)
+    {
+        Answer::create([
+            'user_id' => $request->user()->id,
+            'question_id' => $question->id,
+            'body' => $request->body,
+        ]);
+
+        return back()->with('success', 'Your answer is published');
+    }
 
     /**
      * Display the specified resource.
