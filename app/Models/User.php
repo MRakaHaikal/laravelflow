@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
+    public function answers(): HasMany
+    {
+        return $this->hasMany(Answer::class);
+    }
+
     public function avatarUrl()
     {
         $email = strtolower(trim($this->email));

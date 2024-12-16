@@ -39,8 +39,7 @@ const emit = defineEmits(['edit', 'remove'])
                         <a href="#" class="avatar-sm">
                             <img :src="question.user.avatar_url" size="16" alt="{{ question.user.name }}" srcset="">
                             {{ question.user.name }}
-                        </a>
-                        <span class="text-muted">asked <time :datetime="question.created_at.machine">{{
+                        </a> <span class="text-muted">asked <time :datetime="question.created_at.machine">{{
                             question.created_at.human }}</time>
                         </span>
                     </div>
