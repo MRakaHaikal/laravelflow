@@ -3,7 +3,7 @@
         <div class="toast-container bottom-0 end-0 me-3 mb-3" v-show="message">
             <div class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive"
                 aria-atomic="true" :id="id">
-                <div class="d-flex">
+                <div class="d-flex" >
                     <div class="toast-body">
                         {{ message }}
                     </div>
@@ -26,4 +26,3 @@ defineProps({
     }
 })
 </script>
-<style></style>

@@ -2,25 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuestionRequest;
 use Inertia\Inertia;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Resources\QuestionResource;
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 
 class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = $request->query('filter', 'latest');
+
         $questions = QuestionResource::collection(
-            Question::with('user')->latest()->paginate(15)
+            Question::with('user')
+                ->when($filter === 'mine', function ($query) {
+                    $query->mine();
+                })
+                // ->when($filter === 'latest', function ($query) {
+                //     $query->latest();
+                // })
+                ->when($filter === 'unanswered', function ($query) {
+                    $query->where('answers_count', 0);
+                })
+                ->when($filter === 'scored', function ($query) {
+                    $query->where('votes_count', '!=', 0);
+                })
+                ->latest()
+                ->paginate(15)
         );
 
         return Inertia::render('Questions/Index', [
-            'questions' => $questions
+            'questions' => $questions,
+            'filter' => $filter
         ]);
     }
 
@@ -65,9 +83,11 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $question->update($request->validated());
+
+        return back()->with('success', 'Your question is updated successfully');
     }
 
     /**
@@ -75,6 +95,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return back()->with('success', 'Your question is deleted successfully');
     }
 }
