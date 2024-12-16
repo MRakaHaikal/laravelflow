@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
 use Illuminate\Console\View\Components\Ask;
@@ -66,6 +67,8 @@ class AnswerController extends Controller
      */
     public function destroy(Question $question, Answer $answer)
     {
+        Gate::authorize('delete', $answer);
+
         $answer->delete();
 
         return back()->with('success', 'Your answer is deleted successfully');

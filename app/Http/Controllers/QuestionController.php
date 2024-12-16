@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Resources\AnswerResource;
 use App\Http\Resources\QuestionResource;
 use App\Http\Requests\StoreQuestionRequest;
@@ -21,20 +22,19 @@ class QuestionController extends Controller
 
         $questions = QuestionResource::collection(
             Question::with('user')
+                ->withCount('answers')
                 ->when($filter === 'mine', function ($query) {
                     $query->mine();
                 })
-                // ->when($filter === 'latest', function ($query) {
-                //     $query->latest();
-                // })
                 ->when($filter === 'unanswered', function ($query) {
                     $query->where('answers_count', 0);
                 })
                 ->when($filter === 'scored', function ($query) {
-                    $query->where('votes_count', '!=', 0);
+                    $query->whereNotNull('best_answer_id');
                 })
                 ->latest()
                 ->paginate(15)
+                ->withQueryString()
         );
 
         return Inertia::render('Questions/Index', [
@@ -89,6 +89,8 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
+        Gate::authorize('update', $question);
+
         $question->update($request->validated());
 
         return back()->with('success', 'Your question is updated successfully');
@@ -99,6 +101,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
+        Gate::authorize('delete', $question);
+
         $question->delete();
 
         return back()->with('success', 'Your question is deleted successfully');

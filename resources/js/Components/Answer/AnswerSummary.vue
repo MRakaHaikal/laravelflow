@@ -41,7 +41,7 @@
             <div class="d-flex justify-content-end mb-2">
                 <Author :post-at="answer.created_at" :user="answer.user" isAnswer />
             </div>
-            <ActionButtons v-if="$page.props.user && $page.props.user.id === props.answer.user.id"
+            <ActionButtons :allow-updated="answer.can_be.updated" :allow-deleted="answer.can_be.deleted"
                 @remove="removeAnswer" @edit="emit('edit', answer)" />
         </div>
 

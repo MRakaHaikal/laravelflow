@@ -2,4 +2,12 @@
 
 namespace App\Http\Requests;
 
-class UpdateAnswerRequest extends StoreAnswerRequest {}
+use Illuminate\Support\Facades\Gate;
+
+class UpdateAnswerRequest extends StoreAnswerRequest
+{
+    public function authorize(): bool
+    {
+        return Gate::allows('update', $this->route('answer'));
+    }
+}
