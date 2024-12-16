@@ -7,7 +7,7 @@ defineProps({
         type: Object,
         required: true
     }
-})
+});
 
 const emit = defineEmits(['edit', 'remove'])
 </script>
